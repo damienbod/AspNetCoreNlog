@@ -1,0 +1,7 @@
+Logs
+.vs/AspNetCoreNlog/v14/.suo
+src/AspNetCoreNlog/AspNetCoreNlog.xproj.user
+src/AspNetCoreNlog/bin
+src/AspNetCoreNlog/obj
+src/AspNetCoreNlog/project.lock.json
+.vs
