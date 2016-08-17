@@ -1,8 +1,8 @@
 # ASP.NET Core logging with NLog and MS SQLServer
 
-This article shows how to setup logging in an ASP.NET Core application to log to a Microsoft SQL Server using NLog.
+This article shows how to setup logging in an ASP.NET Core application which logs to a Microsoft SQL Server using NLog.
 
-The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient are added to the dependencies in the projecgt.json file.
+The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient are added to the dependencies in the project.json file.
 
 ```javascript
  "dependencies": {
@@ -28,9 +28,7 @@ The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient a
 ```
 
 
-Now a nlog.config file is created and added to the project. This file contains the configuration for NLog. 
-In the file, the targets for the logs are defined as well as the rules, which logs are sent where. An internalLogFile is also defined, so that is something is wrong with the logging configuration, you can find out why. 
- 
+Now a nlog.config file is created and added to the project. This file contains the configuration for NLog. In the file, the targets for the logs are defined as well as the rules. An internal log file is also defined, so that if something is wrong with the logging configuration, you can find out why. 
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -154,7 +152,7 @@ Now the database can be setup. You can create a new database, or use and existin
 
 The table in the database must match the configuration defined in the nlog.config file. The database target defines the connection string, the command used to add a log and also the parameters required.
 
-You can change this as required. As yet, must of the NLog parameters, do not work with ASP.NET Core, but this will certainly change as it is in early development. The NLog.Web Nuget package, when completed will contain the ASP.NET Core parameters.
+You can change this as required. As yet, most of the NLog parameters, do not work with ASP.NET Core, but this will certainly change as it is in early development. The NLog.Web Nuget package, when completed will contain the ASP.NET Core parameters.
 
 
 Now NLog can be added to the application in the Startup class in the configure method. The AddNLog extension method is used and the logging directory can be defined.
