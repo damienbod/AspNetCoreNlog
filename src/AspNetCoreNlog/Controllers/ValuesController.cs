@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AspNetCoreNlog.Controllers
 {
+    [ServiceFilter(typeof(LogFilter))]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
@@ -17,7 +18,6 @@ namespace AspNetCoreNlog.Controllers
             _logger = logger;
         }
 
-        // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
