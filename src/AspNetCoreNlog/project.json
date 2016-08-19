@@ -1,4 +1,4 @@
-﻿{
+{
     "dependencies": {
         "Microsoft.NETCore.App": {
             "version": "1.0.0",
@@ -16,7 +16,8 @@
         "Microsoft.Extensions.Logging.Debug": "1.0.0",
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
         "NLog.Extensions.Logging": "1.0.0-rtm-alpha4",
-        "System.Data.SqlClient": "4.1.0"
+        "System.Data.SqlClient": "4.1.0",
+        "NLog.Targets.ElasticSearch": "1.0.0-*"
   },
   "tools": {
     "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"

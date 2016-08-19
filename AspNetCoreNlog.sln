@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetCoreNlog", "src\AspNetCoreNlog\AspNetCoreNlog.xproj", "{697DEC29-7B76-4B02-9533-FC131647034E}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NLog.Targets.ElasticSearch", "src\NLog.Targets.ElasticSearch\NLog.Targets.ElasticSearch.xproj", "{E4047840-7D8E-4089-A5FD-691192CA4155}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,11 +25,16 @@ Global
 		{697DEC29-7B76-4B02-9533-FC131647034E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{697DEC29-7B76-4B02-9533-FC131647034E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{697DEC29-7B76-4B02-9533-FC131647034E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4047840-7D8E-4089-A5FD-691192CA4155}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4047840-7D8E-4089-A5FD-691192CA4155}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4047840-7D8E-4089-A5FD-691192CA4155}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4047840-7D8E-4089-A5FD-691192CA4155}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{697DEC29-7B76-4B02-9533-FC131647034E} = {D82C9880-2134-41A3-B428-24AC5318F17E}
+		{E4047840-7D8E-4089-A5FD-691192CA4155} = {D82C9880-2134-41A3-B428-24AC5318F17E}
 	EndGlobalSection
 EndGlobal

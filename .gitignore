@@ -5,3 +5,8 @@ src/AspNetCoreNlog/bin
 src/AspNetCoreNlog/obj
 src/AspNetCoreNlog/project.lock.json
 .vs
+src/NLog.Targets.ElasticSearch/obj
+src/NLog.Targets.ElasticSearch/bin
+src/NLog.Targets.ElasticSearch/project.lock.json
+src/NLog.Targets.ElasticSearch/NLog.Targets.ElasticSearch.xproj.user
+src/AspNetCoreNlog/nlog-all.log
