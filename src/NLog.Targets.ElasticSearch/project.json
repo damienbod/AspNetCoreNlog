@@ -8,9 +8,15 @@
         "Elasticsearch.Net": "2.4.3"
     },
 
-  "frameworks": {
-    "netstandard1.6": {
-      "imports": "dnxcore50"
+    "frameworks": {
+        "netstandard1.6": {
+            "imports": "dnxcore50"
+        },
+        "net451": {
+            "frameworkAssemblies": {
+                "System.Runtime.Serialization": "",
+                "System.Runtime": ""
+            }
+        }
     }
-  }
 }

@@ -23,16 +23,19 @@ namespace NLog.Targets.ElasticSearch
             }
         }
 
-        //public static string GetConnectionString(this string name)
-        //{
-        //    var value = GetEnvironmentVariable(name);
-        //    if (!string.IsNullOrEmpty(value))
-        //        return value;
-
-        //    var connectionString = ConfigurationManager.ConnectionStrings[name];
-
-        //    return connectionString?.ConnectionString;
-        //}
+        public static string GetConnectionString(this string name)
+        {
+            var value = GetEnvironmentVariable(name);
+            if (!string.IsNullOrEmpty(value))
+                return value;
+#if NET45
+            var connectionString = ConfigurationManager.ConnectionStrings[name];
+            return connectionString?.ConnectionString;
+#else
+            return null;
+#endif
+           
+        }
 
         private static string GetEnvironmentVariable(this string name)
         {

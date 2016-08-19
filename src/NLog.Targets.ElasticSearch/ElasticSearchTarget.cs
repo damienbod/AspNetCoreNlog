@@ -80,8 +80,8 @@ namespace NLog.Targets.ElasticSearch
         {
             base.InitializeTarget();
 
-            //var uri = ConnectionStringName.GetConnectionString() ?? Uri;
-            var uri = Uri;
+            var uri = ConnectionStringName.GetConnectionString() ?? Uri;
+            //var uri = Uri;
             var nodes = uri.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(url => new Uri(url));
             var connectionPool = new StaticConnectionPool(nodes);
             IConnectionConfigurationValues config = new ConnectionConfiguration(connectionPool);
