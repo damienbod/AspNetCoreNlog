@@ -1,4 +1,9 @@
 ﻿using System;
+using System.IO;
+#if NET45
+#else
+using Microsoft.Extensions.Configuration;
+#endif
 
 namespace NLog.Targets.ElasticSearch
 {
@@ -32,9 +37,15 @@ namespace NLog.Targets.ElasticSearch
             var connectionString = ConfigurationManager.ConnectionStrings[name];
             return connectionString?.ConnectionString;
 #else
-            return null;
+            IConfigurationRoot configuration;
+            var builder = new Microsoft.Extensions.Configuration.ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+            configuration = builder.Build();
+            return configuration["ElasticsearchUrl"];
 #endif
-           
+
         }
 
         private static string GetEnvironmentVariable(this string name)
