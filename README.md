@@ -1,10 +1,12 @@
 
-NLog posts in this series:
+# NLog posts in this series:
 
 <ol>
 	<li><a href="https://damienbod.com/2016/08/17/asp-net-core-logging-with-nlog-and-microsoft-sql-server/">ASP.NET Core logging with NLog and Microsoft SQL Server</a></li>
 	<li><a href="https://damienbod.com/2016/08/20/asp-net-core-logging-with-nlog-and-elasticsearch/">ASP.NET Core logging with NLog and Elasticsearch</a></li>
 </ol>
+
+<hr/>
 
 # ASP.NET Core logging with NLog and MS SQLServer
 
