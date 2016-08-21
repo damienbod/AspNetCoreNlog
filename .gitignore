@@ -10,3 +10,7 @@ src/NLog.Targets.ElasticSearch/bin
 src/NLog.Targets.ElasticSearch/project.lock.json
 src/NLog.Targets.ElasticSearch/NLog.Targets.ElasticSearch.xproj.user
 src/AspNetCoreNlog/nlog-all.log
+src/ConsoleNLog/bin
+src/ConsoleNLog/obj
+src/ConsoleNLog/project.lock.json
+src/ConsoleNLog/ConsoleNLog.xproj.user
