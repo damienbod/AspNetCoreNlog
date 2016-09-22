@@ -43,14 +43,13 @@ namespace AspNetCoreNlog
             var configDir = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
 
             if (configDir != string.Empty)
-            {
-                var logEventInfo = NLog.LogEventInfo.CreateNullEvent();
-
+            {     
                 foreach (DatabaseTarget target in LogManager.Configuration.AllTargets.Where(t => t is DatabaseTarget))
                 {
-                    var filename = target.ConnectionString = Configuration.GetConnectionString("NLogDb");
+                    target.ConnectionString = Configuration.GetConnectionString("NLogDb");
                 }
 
+                var logEventInfo = NLog.LogEventInfo.CreateNullEvent();
                 foreach (FileTarget target in LogManager.Configuration.AllTargets.Where(t => t is FileTarget))
                 {
                     var filename = target.FileName.Render(logEventInfo).Replace("'", "");
