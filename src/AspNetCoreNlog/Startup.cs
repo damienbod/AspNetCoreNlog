@@ -46,6 +46,10 @@ namespace AspNetCoreNlog
             {
                 var logEventInfo = NLog.LogEventInfo.CreateNullEvent();
 
+                foreach (DatabaseTarget target in LogManager.Configuration.AllTargets.Where(t => t is DatabaseTarget))
+                {
+                    var filename = target.ConnectionString = Configuration.GetConnectionString("NLogDb");
+                }
 
                 foreach (FileTarget target in LogManager.Configuration.AllTargets.Where(t => t is FileTarget))
                 {

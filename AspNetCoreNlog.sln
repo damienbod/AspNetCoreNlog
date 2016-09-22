@@ -15,6 +15,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "AspNetCoreNlog", "src\AspNe
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "NLog.Targets.ElasticSearch", "src\NLog.Targets.ElasticSearch\NLog.Targets.ElasticSearch.xproj", "{E4047840-7D8E-4089-A5FD-691192CA4155}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ConsoleNLog", "src\ConsoleNLog\ConsoleNLog.xproj", "{1012D69F-4831-4009-9600-7D347334B9DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{E4047840-7D8E-4089-A5FD-691192CA4155}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4047840-7D8E-4089-A5FD-691192CA4155}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4047840-7D8E-4089-A5FD-691192CA4155}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1012D69F-4831-4009-9600-7D347334B9DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1012D69F-4831-4009-9600-7D347334B9DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1012D69F-4831-4009-9600-7D347334B9DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1012D69F-4831-4009-9600-7D347334B9DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,5 +42,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{697DEC29-7B76-4B02-9533-FC131647034E} = {D82C9880-2134-41A3-B428-24AC5318F17E}
 		{E4047840-7D8E-4089-A5FD-691192CA4155} = {D82C9880-2134-41A3-B428-24AC5318F17E}
+		{1012D69F-4831-4009-9600-7D347334B9DD} = {D82C9880-2134-41A3-B428-24AC5318F17E}
 	EndGlobalSection
 EndGlobal
