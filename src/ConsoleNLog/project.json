@@ -7,7 +7,7 @@
     "dependencies": {
         "Microsoft.NETCore.App": {
             "type": "platform",
-            "version": "1.0.0"
+            "version": "1.0.1"
         },
         "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
         "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
