@@ -321,6 +321,8 @@ NLog for ASP.NET Core is in early development, and the documetation is for .NET 
 
 ## Links
 
+https://github.com/NLog/NLog.Web
+
 https://github.com/NLog/NLog.Extensions.Logging
 
 https://github.com/NLog
