@@ -1,15 +1,17 @@
 
 # NLog posts in this series:
 
+<strong>Version:</strong> <a href="https://github.com/damienbod/AspNetCoreNlog">VS2017 RC3 csproj</a> | <a href="https://github.com/damienbod/AspNetCoreNlog/tree/VS2015_project_json">VS2015 project.json</a>
+
+
 <ol>
 	<li><a href="https://damienbod.com/2016/08/17/asp-net-core-logging-with-nlog-and-microsoft-sql-server/">ASP.NET Core logging with NLog and Microsoft SQL Server</a></li>
 	<li><a href="https://damienbod.com/2016/08/20/asp-net-core-logging-with-nlog-and-elasticsearch/">ASP.NET Core logging with NLog and Elasticsearch</a></li>
 	<li><a href="https://damienbod.com/2016/09/22/setting-the-nlog-database-connection-string-in-the-asp-net-core-appsettings-json/">Settings the NLog database connection string in the ASP.NET Core appsettings.json</a></li>
 </ol>
 
-<hr/>
 
-# ASP.NET Core logging with NLog and MS SQLServer
+## ASP.NET Core logging with NLog and MS SQLServer
 
 This article shows how to setup logging in an ASP.NET Core application which logs to a Microsoft SQL Server using NLog.
 
