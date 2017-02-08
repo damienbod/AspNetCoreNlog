@@ -310,6 +310,10 @@ NLog for ASP.NET Core is in early development, and the documetation is for .NET 
 
 ## Links
 
+https://github.com/NLog/NLog.Web/wiki/Getting-started-with-ASP.NET-Core-(project.json)
+
+https://www.nuget.org/packages/NLog.Web.AspNetCore/
+
 https://github.com/NLog/NLog.Extensions.Logging
 
 https://github.com/NLog
