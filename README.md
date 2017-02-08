@@ -37,8 +37,7 @@ The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient a
         "Microsoft.Extensions.Logging.Console": "1.1.0",
         "Microsoft.Extensions.Logging.Debug": "1.1.0",
         "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-        "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
-        "NLog.Extensions.Logging": "1.0.0-rtm-alpha5",
+        "NLog.Web.AspNetCore": "4.3.0",
         "System.Data.SqlClient": "4.3.0"
   },
 
