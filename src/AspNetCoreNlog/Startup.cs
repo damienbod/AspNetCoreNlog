@@ -8,6 +8,8 @@ using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Extensions.Logging;
 using NLog.Targets;
+using Microsoft.AspNetCore.Http;
+using NLog.Web;
 
 namespace AspNetCoreNlog
 {
@@ -28,7 +30,7 @@ namespace AspNetCoreNlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Add framework services.
             services.AddMvc();
 
@@ -39,6 +41,9 @@ namespace AspNetCoreNlog
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddNLog();
+
+            //add NLog.Web
+            app.AddNLogWeb();
 
             var configDir = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
 
