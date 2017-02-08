@@ -18,22 +18,28 @@ The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient a
 ```javascript
  "dependencies": {
         "Microsoft.NETCore.App": {
-            "version": "1.0.0",
+            "version": "1.1.0",
             "type": "platform"
         },
-        "Microsoft.AspNetCore.Mvc": "1.0.0",
-        "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
-        "Microsoft.AspNetCore.Diagnostics": "1.0.0",
-        "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
-        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
-        "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
-        "Microsoft.Extensions.Configuration.Json": "1.0.0",
-        "Microsoft.Extensions.Logging": "1.0.0",
-        "Microsoft.Extensions.Logging.Console": "1.0.0",
-        "Microsoft.Extensions.Logging.Debug": "1.0.0",
-        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
-        "NLog.Extensions.Logging": "1.0.0-rtm-alpha4",
-        "System.Data.SqlClient": "4.1.0"
+        "Microsoft.AspNetCore.Diagnostics": "1.1.0",
+        "Microsoft.AspNetCore.Mvc": "1.1.0",
+        "Microsoft.AspNetCore.Localization": "1.1.0",
+        "Microsoft.AspNetCore.Mvc.Localization": "1.1.0",
+        "Microsoft.AspNetCore.Routing": "1.1.0",
+        "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
+        "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+        "Microsoft.AspNetCore.StaticFiles": "1.1.0",
+        "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final",
+        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+        "Microsoft.Extensions.Configuration.Json": "1.1.0",
+        "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
+        "Microsoft.Extensions.Logging": "1.1.0",
+        "Microsoft.Extensions.Logging.Console": "1.1.0",
+        "Microsoft.Extensions.Logging.Debug": "1.1.0",
+        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
+        "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.1.0",
+        "NLog.Extensions.Logging": "1.0.0-rtm-alpha5",
+        "System.Data.SqlClient": "4.3.0"
   },
 
 ```
