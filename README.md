@@ -10,9 +10,8 @@
 	<li><a href="https://damienbod.com/2016/09/22/setting-the-nlog-database-connection-string-in-the-asp-net-core-appsettings-json/">Settings the NLog database connection string in the ASP.NET Core appsettings.json</a></li>
 </ol>
 
-<hr/>
 
-# ASP.NET Core logging with NLog and MS SQLServer
+## ASP.NET Core logging with NLog and MS SQLServer
 
 This article shows how to setup logging in an ASP.NET Core application which logs to a Microsoft SQL Server using NLog.
 
