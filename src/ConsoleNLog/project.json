@@ -4,21 +4,21 @@
         "emitEntryPoint": true
     },
 
-    "dependencies": {
-        "Microsoft.NETCore.App": {
-            "type": "platform",
-            "version": "1.1.0"
-        },
-        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
-        "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
-        "Microsoft.Extensions.Configuration.Json": "1.1.0",
-        "Microsoft.Extensions.Logging": "1.1.0",
-        "Microsoft.Extensions.Logging.Console": "1.1.0",
-        "Microsoft.Extensions.Logging.Debug": "1.1.0",
-        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-        "NLog.Extensions.Logging": "1.0.0-rtm-alpha5",
-        "System.Data.SqlClient": "4.3.0"
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.1.0"
     },
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.1.0",
+    "Microsoft.Extensions.Logging": "1.1.0",
+    "Microsoft.Extensions.Logging.Console": "1.1.0",
+    "Microsoft.Extensions.Logging.Debug": "1.1.0",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
+    "NLog.Web.AspNetCore": "4.3.0",
+    "System.Data.SqlClient": "4.3.0"
+  },
 
     "frameworks": {
         "netcoreapp1.1": {
