@@ -1,6 +1,9 @@
 
 # NLog posts in this series:
 
+<strong>Version:</strong> <a href="https://github.com/damienbod/AspNetCoreNlog">VS2017 RC3 csproj</a> | <a href="https://github.com/damienbod/AspNetCoreNlog/tree/VS2015_project_json">VS2015 project.json</a>
+
+
 <ol>
 	<li><a href="https://damienbod.com/2016/08/17/asp-net-core-logging-with-nlog-and-microsoft-sql-server/">ASP.NET Core logging with NLog and Microsoft SQL Server</a></li>
 	<li><a href="https://damienbod.com/2016/08/20/asp-net-core-logging-with-nlog-and-elasticsearch/">ASP.NET Core logging with NLog and Elasticsearch</a></li>
@@ -13,34 +16,51 @@
 
 This article shows how to setup logging in an ASP.NET Core application which logs to a Microsoft SQL Server using NLog.
 
-The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient are added to the dependencies in the project.json file.
+The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient are added to the dependencies in the csproj file.
 
 ```javascript
- "dependencies": {
-        "Microsoft.NETCore.App": {
-            "version": "1.1.0",
-            "type": "platform"
-        },
-        "Microsoft.AspNetCore.Diagnostics": "1.1.0",
-        "Microsoft.AspNetCore.Mvc": "1.1.0",
-        "Microsoft.AspNetCore.Localization": "1.1.0",
-        "Microsoft.AspNetCore.Mvc.Localization": "1.1.0",
-        "Microsoft.AspNetCore.Routing": "1.1.0",
-        "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
-        "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-        "Microsoft.AspNetCore.StaticFiles": "1.1.0",
-        "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final",
-        "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
-        "Microsoft.Extensions.Configuration.Json": "1.1.0",
-        "Microsoft.Extensions.Configuration.UserSecrets": "1.1.0",
-        "Microsoft.Extensions.Logging": "1.1.0",
-        "Microsoft.Extensions.Logging.Console": "1.1.0",
-        "Microsoft.Extensions.Logging.Debug": "1.1.0",
-        "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
-        "NLog.Web.AspNetCore": "4.3.0",
-        "System.Data.SqlClient": "4.3.0"
-  },
-
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <AssemblyName>AspNetCoreNlog</AssemblyName>
+    <OutputType>Exe</OutputType>
+    <PackageId>AspNetCoreNlog</PackageId>
+    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\**\*;Views;Areas\**\Views;appsettings.json;nlog.config;web.config">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NLog.Targets.ElasticSearch\NLog.Targets.ElasticSearch.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.0.0-msbuild3-final" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.0" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0-msbuild3-final" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
+  </ItemGroup>
+</Project>
 ```
 
 
@@ -130,20 +150,14 @@ Now a nlog.config file is created and added to the project. This file contains t
 
 ```
 
-The nlog.config also needs to be added to the publishOptions in the project.json file.
+The nlog.config also needs to be added to the publishOptions in the csproj file.
 
 ```javascript
- "publishOptions": {
-    "include": [
-        "wwwroot",
-        "Views",
-        "Areas/**/Views",
-        "appsettings.json",
-        "web.config",
-        "nlog.config"
-    ]
-  },
-
+  <ItemGroup>
+    <Content Update="wwwroot\**\*;Views;Areas\**\Views;appsettings.json;nlog.config;web.config">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 ```
 
 Now the database can be setup. You can create a new database, or use and existing one and add the dbo.Log table to it using the script below. 
