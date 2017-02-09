@@ -12,21 +12,7 @@ namespace ConsoleNLog
         public static void Main(string[] args)
         {
 
-            var configDir = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
-
-            if (configDir != string.Empty)
-            {
-                var logEventInfo = NLog.LogEventInfo.CreateNullEvent();
-
-
-                foreach (FileTarget target in LogManager.Configuration.AllTargets.Where(t => t is FileTarget))
-                {
-                    var filename = target.FileName.Render(logEventInfo).Replace("'", "");
-                    target.FileName = System.IO.Path.Combine(configDir, filename);
-                }
-
-                LogManager.ReconfigExistingLoggers();
-            }
+            LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
 
             var logger = LogManager.GetLogger("console");
             logger.Warn("console logging is great");
