@@ -17,7 +17,7 @@ This article shows how to setup logging in an ASP.NET Core application which log
 
 The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient are added to the dependencies in the csproj file.
 
-```javascript
+```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
