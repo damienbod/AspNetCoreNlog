@@ -17,7 +17,7 @@ This article shows how to setup logging in an ASP.NET Core application which log
 
 The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient are added to the dependencies in the csproj file.
 
-```javascript
+```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>netcoreapp1.1</TargetFramework>
@@ -161,7 +161,7 @@ The nlog.config also needs to be added to the publishOptions in the csproj file.
 
 Now the database can be setup. You can create a new database, or use and existing one and add the dbo.Log table to it using the script below. 
 
-```csharp
+```sql
   SET ANSI_NULLS ON
   SET QUOTED_IDENTIFIER ON
   CREATE TABLE [dbo].[Log] (
