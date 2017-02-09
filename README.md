@@ -56,20 +56,29 @@ Now a nlog.config file is created and added to the project. This file contains t
       internalLogLevel="Warn"
       internalLogFile="C:\git\damienbod\AspNetCoreNlog\Logs\internal-nlog.txt">
     
+    <extensions>
+        <add assembly="NLog.Targets.ElasticSearch"/>
+        <add assembly="NLog.Web.AspNetCore"/>
+    </extensions>
+            
   <targets>
-    <target xsi:type="File" name="allfile" fileName="nlog-all.log"
+    <target xsi:type="File" name="allfile" fileName="${var:configDir}\nlog-all.log"
                 layout="${longdate}|${event-properties:item=EventId.Id}|${logger}|${uppercase:${level}}|${message} ${exception}" />
 
-    <target xsi:type="File" name="ownFile-web" fileName="nlog-own.log"
+    <target xsi:type="File" name="ownFile-web" fileName="${var:configDir}\nlog-own.log"
              layout="${longdate}|${event-properties:item=EventId.Id}|${logger}|${uppercase:${level}}|  ${message} ${exception}" />
 
     <target xsi:type="Null" name="blackhole" />
 
+    <target name="ElasticSearch" xsi:type="BufferingWrapper" flushTimeout="5000">
+      <target xsi:type="ElasticSearch"/>
+    </target>
+        
     <target name="database" xsi:type="Database" >
 
-        <connectionString>
-            Data Source=N275\MSSQLSERVER2014;Initial Catalog=Nlogs;Integrated Security=True;
-        </connectionString>
+    <!--<connectionString>
+        Data Source=N275\MSSQLSERVER2014;Initial Catalog=Nlogs;Integrated Security=True;
+    </connectionString>-->
 <!--
   Remarks:
     The appsetting layouts require the NLog.Extended assembly.
@@ -109,7 +118,7 @@ Now a nlog.config file is created and added to the project. This file contains t
           <parameter name="@application" layout="AspNetCoreNlog" />
           <parameter name="@logged" layout="${date}" />
           <parameter name="@level" layout="${level}" />
-          <parameter name="@message" layout="${message}" />
+          <parameter name="@message" layout="url: ${aspnet-request-url} | action: ${aspnet-mvc-action} | ${message}" />
 
           <parameter name="@logger" layout="${logger}" />
           <parameter name="@callSite" layout="${callsite:filename=true}" />
@@ -122,6 +131,8 @@ Now a nlog.config file is created and added to the project. This file contains t
     <!--All logs, including from Microsoft-->
     <logger name="*" minlevel="Trace" writeTo="allfile" />
 
+    <logger name="*" minlevel="Trace" writeTo="ElasticSearch" />
+      
     <logger name="*" minlevel="Trace" writeTo="database" />
       
     <!--Skip Microsoft logs and so log only own logs-->
@@ -129,23 +140,6 @@ Now a nlog.config file is created and added to the project. This file contains t
     <logger name="*" minlevel="Trace" writeTo="ownFile-web" />
   </rules>
 </nlog>
-
-```
-
-The nlog.config also needs to be added to the publishOptions in the project.json file.
-
-```javascript
- "publishOptions": {
-    "include": [
-        "wwwroot",
-        "Views",
-        "Areas/**/Views",
-        "appsettings.json",
-        "web.config",
-        "nlog.config"
-    ]
-  },
-
 ```
 
 Now the database can be setup. You can create a new database, or use and existing one and add the dbo.Log table to it using the script below. 
@@ -180,28 +174,12 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 {
     loggerFactory.AddNLog();
 
-    var configDir = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
+	//add NLog.Web
+	app.AddNLogWeb();
 
-    if (configDir != string.Empty)
-    {
-        var logEventInfo = NLog.LogEventInfo.CreateNullEvent();
+	LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
 
-
-        foreach (FileTarget target in LogManager.Configuration.AllTargets.Where(t => t is FileTarget))
-        {
-            var filename = target.FileName.Render(logEventInfo).Replace("'", "");
-            target.FileName = Path.Combine(configDir, filename);
-        }
-
-        LogManager.ReconfigExistingLoggers();
-    }
-
-    //env.ConfigureNLog("nlog.config");
-
-    //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-    //loggerFactory.AddDebug();
-
-    app.UseMvc();
+	app.UseMvc();
 }
 
 ```
