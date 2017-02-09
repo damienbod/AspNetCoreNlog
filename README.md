@@ -93,9 +93,8 @@ Now a nlog.config file is created and added to the project. This file contains t
         
     <target name="database" xsi:type="Database" >
 
-    <!--<connectionString>
-        Data Source=N275\MSSQLSERVER2014;Initial Catalog=Nlogs;Integrated Security=True;
-    </connectionString>-->
+    <connectionString>${var:connectionString}</connectionString>
+	
 <!--
   Remarks:
     The appsetting layouts require the NLog.Extended assembly.
@@ -204,6 +203,14 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 	//add NLog.Web
 	app.AddNLogWeb();
 
+	////foreach (DatabaseTarget target in LogManager.Configuration.AllTargets.Where(t => t is DatabaseTarget))
+	////{
+	////	target.ConnectionString = Configuration.GetConnectionString("NLogDb");
+	////}
+	
+	////LogManager.ReconfigExistingLoggers();
+
+	LogManager.Configuration.Variables["connectionString"] = Configuration.GetConnectionString("NLogDb");
 	LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
 
 	app.UseMvc();
