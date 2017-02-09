@@ -1,7 +1,7 @@
 
 # NLog posts in this series:
 
-<strong>Version:</strong> <a href="https://github.com/damienbod/AspNetCoreNlog">VS2017 RC3 csproj</a> | <a href="https://github.com/damienbod/AspNetCoreNlog/tree/VS2015_project_json">VS2015 project.json</a>
+<strong>Version:</strong> <a href="https://github.com/damienbod/AspNetCoreNlog">VS2017 csproj</a> | <a href="https://github.com/damienbod/AspNetCoreNlog/tree/VS2015_project_json">VS2015 project.json</a>
 
 
 <ol>
