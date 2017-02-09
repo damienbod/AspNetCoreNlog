@@ -45,29 +45,7 @@ namespace AspNetCoreNlog
             //add NLog.Web
             app.AddNLogWeb();
 
-            var configDir = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
-
-            if (configDir != string.Empty)
-            {     
-                foreach (DatabaseTarget target in LogManager.Configuration.AllTargets.Where(t => t is DatabaseTarget))
-                {
-                    target.ConnectionString = Configuration.GetConnectionString("NLogDb");
-                }
-
-                var logEventInfo = NLog.LogEventInfo.CreateNullEvent();
-                foreach (FileTarget target in LogManager.Configuration.AllTargets.Where(t => t is FileTarget))
-                {
-                    var filename = target.FileName.Render(logEventInfo).Replace("'", "");
-                    target.FileName = Path.Combine(configDir, filename);
-                }
-
-                LogManager.ReconfigExistingLoggers();
-            }
-
-            //env.ConfigureNLog("nlog.config");
-
-            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            //loggerFactory.AddDebug();
+            LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
 
             app.UseMvc();
         }
