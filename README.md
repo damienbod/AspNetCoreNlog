@@ -150,7 +150,7 @@ The nlog.config also needs to be added to the publishOptions in the project.json
 
 Now the database can be setup. You can create a new database, or use and existing one and add the dbo.Log table to it using the script below. 
 
-```csharp
+```sql
   SET ANSI_NULLS ON
   SET QUOTED_IDENTIFIER ON
   CREATE TABLE [dbo].[Log] (
