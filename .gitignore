@@ -14,3 +14,5 @@ src/ConsoleNLog/bin
 src/ConsoleNLog/obj
 src/ConsoleNLog/project.lock.json
 src/ConsoleNLog/ConsoleNLog.xproj.user
+src/ConsoleNLogMySQL/bin
+src/ConsoleNLogMySQL/obj
