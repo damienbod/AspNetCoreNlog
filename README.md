@@ -8,6 +8,8 @@
 	<li><a href="https://damienbod.com/2016/08/17/asp-net-core-logging-with-nlog-and-microsoft-sql-server/">ASP.NET Core logging with NLog and Microsoft SQL Server</a></li>
 	<li><a href="https://damienbod.com/2016/08/20/asp-net-core-logging-with-nlog-and-elasticsearch/">ASP.NET Core logging with NLog and Elasticsearch</a></li>
 	<li><a href="https://damienbod.com/2016/09/22/setting-the-nlog-database-connection-string-in-the-asp-net-core-appsettings-json/">Settings the NLog database connection string in the ASP.NET Core appsettings.json</a></li>
+	<li><a href="https://damienbod.com/2017/03/03/net-core-logging-to-mysql-using-nlog/">.NET Core logging to MySQL using NLog</a></li>
+	
 </ol>
 
 
