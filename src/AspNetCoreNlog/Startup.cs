@@ -54,8 +54,14 @@ namespace AspNetCoreNlog
 
             LogManager.Configuration.Variables["connectionString"] = Configuration.GetConnectionString("NLogDb");
             LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
-
+            LogManager.ConfigurationReloaded += updateConfig;
 			app.UseMvc();
 		}
+		
+		private void updateConfig(object sender, LoggingConfigurationReloadedEventArgs e)
+        {
+            LogManager.Configuration.Variables["connectionString"] = Configuration.GetConnectionString("NLogDb");
+            LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
+        }
     }
 }
