@@ -22,7 +22,7 @@
 
 This article shows how to setup logging in an ASP.NET Core application which logs to a Microsoft SQL Server using NLog.
 
-The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient are added to the dependencies in the csproj file.
+The NLog.Web.AspNetCore Nuget package is added to the dependencies in the csproj file.
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -59,7 +59,7 @@ The NLog.Extensions.Logging Nuget package as well as the System.Data.SqlClient a
 ```
 
 
-Now a nlog.config file is created and added to the project. This file contains the configuration for NLog. In the file, the targets for the logs are defined as well as the rules. An internal log file is also defined, so that if something is wrong with the logging configuration, you can find out why. 
+Now a nlog.config file is created and added to the project. This file contains the configuration for NLog. In the file, the targets for the logs are defined as well as the rules. An internal log file is also defined, so that if something is wrong with the logging configuration, you can find out why. The ${gdc:item=configDir} is set in the application code.
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
