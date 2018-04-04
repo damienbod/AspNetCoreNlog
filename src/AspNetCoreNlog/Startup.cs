@@ -40,7 +40,10 @@ namespace AspNetCoreNlog
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
-			loggerFactory.AddNLog();
+            GlobalDiagnosticsContext.Set("configDir", "C:\\git\\damienbod\\AspNetCoreNlog\\Logs");
+            GlobalDiagnosticsContext.Set("connectionString", "Data Source=N051\\MSSQLSERVER2014;Initial Catalog=Nlogs;Integrated Security=True;");
+
+            loggerFactory.AddNLog();
 
 			app.UseMvc();
 		}

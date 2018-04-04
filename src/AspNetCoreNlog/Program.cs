@@ -16,7 +16,7 @@ namespace AspNetCoreNlog
             GlobalDiagnosticsContext.Set("connectionString", "Data Source=N051\\MSSQLSERVER2014;Initial Catalog=Nlogs;Integrated Security=True;");
             // GlobalDiagnosticsContext.Set("connectionString", Configuration.GetConnectionString("NLogDb"));
             
-            //var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
                 //logger.Debug("init main");
