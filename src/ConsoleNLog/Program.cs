@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using NLog;
-using NLog.Targets;
 
 namespace ConsoleNLog
 {
@@ -11,7 +7,6 @@ namespace ConsoleNLog
     {
         public static void Main(string[] args)
         {
-
             LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
 
             var logger = LogManager.GetLogger("console");
