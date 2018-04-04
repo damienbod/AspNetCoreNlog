@@ -200,7 +200,6 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerF
 
 	app.UseMvc();
 }
-}
 
 ```
 
