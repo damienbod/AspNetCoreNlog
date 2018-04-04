@@ -7,10 +7,10 @@ namespace ConsoleNLogPostgreSQL
     {
         public static void Main(string[] args)
         {
+            GlobalDiagnosticsContext.Set("configDir", "C:\\git\\damienbod\\AspNetCoreNlog\\Logs");
 
-            LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
-
-            var logger = LogManager.GetLogger("console");
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+ 
             logger.Warn("console logging is great");
             logger.Error(new ArgumentException("oh no"));
             Console.WriteLine("log sent");

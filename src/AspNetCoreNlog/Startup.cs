@@ -40,28 +40,12 @@ namespace AspNetCoreNlog
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
-			loggerFactory.AddNLog();
+            GlobalDiagnosticsContext.Set("configDir", "C:\\git\\damienbod\\AspNetCoreNlog\\Logs");
+            GlobalDiagnosticsContext.Set("connectionString", Configuration.GetConnectionString("NLogDb"));
 
-			//add NLog.Web
-			app.AddNLogWeb();
+            loggerFactory.AddNLog();
 
-			////foreach (DatabaseTarget target in LogManager.Configuration.AllTargets.Where(t => t is DatabaseTarget))
-			////{
-			////	target.ConnectionString = Configuration.GetConnectionString("NLogDb");
-			////}
-			
-			////LogManager.ReconfigExistingLoggers();
-
-            LogManager.Configuration.Variables["connectionString"] = Configuration.GetConnectionString("NLogDb");
-            LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
-            LogManager.ConfigurationReloaded += updateConfig;
 			app.UseMvc();
 		}
-		
-		private void updateConfig(object sender, LoggingConfigurationReloadedEventArgs e)
-        {
-            LogManager.Configuration.Variables["connectionString"] = Configuration.GetConnectionString("NLogDb");
-            LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
-        }
     }
 }
