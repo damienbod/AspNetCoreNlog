@@ -11,10 +11,10 @@ namespace ConsoleNLog
     {
         public static void Main(string[] args)
         {
+            GlobalDiagnosticsContext.Set("configDir", "C:\\git\\damienbod\\AspNetCoreNlog\\Logs");
 
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-            LogManager.Configuration.Variables["configDir"] = "C:\\git\\damienbod\\AspNetCoreNlog\\Logs";
-
+  
             logger.Warn("console logging is great");
 
             Console.WriteLine("log sent");
