@@ -25,30 +25,23 @@ The NLog.Web.AspNetCore Nuget package is added to the dependencies in the csproj
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
+  
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>AspNetCoreNlog</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <PackageId>AspNetCoreNlog</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
   <ItemGroup>
-    <Content Update="wwwroot\**\*;Views;Areas\**\Views;appsettings.json;nlog.config;web.config">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
+    <PackageReference Include="NLog.Targets.ElasticSearch" Version="7.1.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.0" PrivateAssets="All" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc5" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
   </ItemGroup>
+  
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="NLog.Targets.ElasticSearch" Version="5.0.0" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.5.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.2" PrivateAssets="All" />
-  </ItemGroup>
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
+  
   <ItemGroup>
     <Content Update="nlog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -68,10 +61,6 @@ Now a nlog.config file is created and added to the project. This file contains t
       internalLogLevel="Warn"
       internalLogFile="C:\git\damienbod\AspNetCoreNlog\Logs\internal-nlog.txt">
     
-    <extensions>
-        <add assembly="NLog.Targets.ElasticSearch"/>
-        <add assembly="NLog.Web.AspNetCore"/>
-    </extensions>
             
   <targets>
     <target xsi:type="File" name="allfile" fileName="${gdc:item=configDir}\nlog-all.log"
@@ -81,14 +70,10 @@ Now a nlog.config file is created and added to the project. This file contains t
              layout="${longdate}|${event-properties:item=EventId.Id}|${logger}|${uppercase:${level}}|  ${message} ${exception}" />
 
     <target xsi:type="Null" name="blackhole" />
-
-    <target name="ElasticSearch" xsi:type="BufferingWrapper" flushTimeout="5000">
-      <target xsi:type="ElasticSearch"/>
-    </target>
         
     <target name="database" xsi:type="Database" >
 
-    <connectionString>${gdc:item=connectionString}</connectionString>
+      <connectionString>${gdc:item=connectionString}</connectionString>
 <!--
   Remarks:
     The appsetting layouts require the NLog.Extended assembly.
@@ -128,7 +113,7 @@ Now a nlog.config file is created and added to the project. This file contains t
           <parameter name="@application" layout="AspNetCoreNlog" />
           <parameter name="@logged" layout="${date}" />
           <parameter name="@level" layout="${level}" />
-          <parameter name="@message" layout="url: ${aspnet-request-url} | action: ${aspnet-mvc-action} | ${message}" />
+          <parameter name="@message" layout="${message}" />
 
           <parameter name="@logger" layout="${logger}" />
           <parameter name="@callSite" layout="${callsite:filename=true}" />
@@ -140,8 +125,6 @@ Now a nlog.config file is created and added to the project. This file contains t
   <rules>
     <!--All logs, including from Microsoft-->
     <logger name="*" minlevel="Trace" writeTo="allfile" />
-
-    <logger name="*" minlevel="Trace" writeTo="ElasticSearch" />
       
     <logger name="*" minlevel="Trace" writeTo="database" />
       
@@ -152,15 +135,6 @@ Now a nlog.config file is created and added to the project. This file contains t
 </nlog>
 ```
 
-The nlog.config also needs to be added to the publishOptions in the csproj file.
-
-```javascript
-  <ItemGroup>
-    <Content Update="wwwroot\**\*;Views;Areas\**\Views;appsettings.json;nlog.config;web.config">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-```
 
 Now the database can be setup. You can create a new database, or use and existing one and add the dbo.Log table to it using the script below. 
 
@@ -190,23 +164,44 @@ You can change this as required. As yet, most of the NLog parameters, do not wor
 Now NLog can be added to the application in the Startup class in the configure method. The AddNLog extension method is used and the logging directory can be defined.
 
 ```csharp
-public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
     GlobalDiagnosticsContext.Set("configDir", "C:\\git\\damienbod\\AspNetCoreNlog\\Logs");
-    GlobalDiagnosticsContext.Set("connectionString", "Data Source=N051\\MSSQLSERVER2014;Initial Catalog=Nlogs;Integrated Security=True;");
+    GlobalDiagnosticsContext.Set("connectionString", Configuration.GetConnectionString("DefaultConnection"));
 
-    loggerFactory.AddNLog();
+    if (env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
+    else
+    {
+        app.UseExceptionHandler("/Home/Error");
+    }
 
-	app.UseMvc();
+
+    app.UseDefaultFiles();
+    app.UseStaticFiles();
+
+    app.UseRouting();
+
+    app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
+    });
 }
 
 ```
 
 ```csharp
 using System;
-using Microsoft.AspNetCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog;
 using NLog.Web;
@@ -217,20 +212,16 @@ namespace AspNetCoreNlog
     {
         public static void Main(string[] args)
         {
-            GlobalDiagnosticsContext.Set("configDir", "C:\\git\\damienbod\\AspNetCoreNlog\\Logs");
-            GlobalDiagnosticsContext.Set("connectionString", "Data Source=N051\\MSSQLSERVER2014;Initial Catalog=Nlogs;Integrated Security=True;");
-            // GlobalDiagnosticsContext.Set("connectionString", Configuration.GetConnectionString("NLogDb"));
-            
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
-                //logger.Debug("init main");
-                BuildWebHost(args).Run();
+                logger.Debug("init main");
+                CreateHostBuilder(args).Build().Run();
             }
             catch (Exception exception)
             {
                 //NLog: catch setup errors
-                //logger.Error(exception, "Stopped program because of exception");
+                logger.Error(exception, "Stopped program because of exception");
                 throw;
             }
             finally
@@ -240,19 +231,20 @@ namespace AspNetCoreNlog
             }
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .ConfigureLogging(logging =>
-                {
-                    logging.ClearProviders();
-                    logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
-                })
-                .UseNLog()  // NLog: Setup NLog for Dependency injection
-                .Build();
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+          Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            })
+            .ConfigureLogging(logging =>
+            {
+                logging.ClearProviders();
+                logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+            })
+            .UseNLog();  // NLog: Setup NLog for Dependency injection
     }
 }
-
 
 ```
 
@@ -309,16 +301,17 @@ The action filter is added in the Startup ConfigureServices services.
 ```csharp
  public void ConfigureServices(IServiceCollection services)
 {
+	services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+	// Add framework services.
+	services.AddControllers();
 
-    // Add framework services.
-    services.AddMvc();
-
-    services.AddScoped<LogFilter>();
+	services.AddScoped<LogFilter>();
 }
 
 ```
 
  And some logging can be added to a MVC controller.
+
 ```csharp
 using System;
 using System.Collections.Generic;
