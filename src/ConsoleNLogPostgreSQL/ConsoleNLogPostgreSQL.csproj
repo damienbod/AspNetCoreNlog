@@ -1,22 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>ConsoleNLogPostgreSQL</AssemblyName>
-    <OutputType>Exe</OutputType>
-    <PackageId>ConsoleNLog</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+  
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
-    <PackageReference Include="NLog.Web.AspNetCore" Version="4.5.1" />
-    <PackageReference Include="Npgsql" Version="4.0.0-preview1" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
+    <PackageReference Include="Npgsql" Version="4.1.2" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Update="nlog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  
 </Project>
