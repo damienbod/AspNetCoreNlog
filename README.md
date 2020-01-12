@@ -15,6 +15,8 @@
 
 # History
 
+2020-01-12 Updated to .NET Core 3.1, NLog.Web.AspNetCore 4.9.0
+
 2018-04-04 Updated to .NET Core 2.0, NLog 4.5.1, and Elasticsearch Nuget package
 
 
