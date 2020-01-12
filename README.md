@@ -346,11 +346,6 @@ When the application is started, the logs are written to a local file in the Log
     
 <img src="https://damienbod.files.wordpress.com/2016/08/sqlaspnetdatabselogger_01.png?w=600" alt="sqlaspnetdatabselogger_01" width="600" height="287" class="alignnone size-medium wp-image-7058" />
 
-## Notes
-
-NLog for ASP.NET Core is in early development, and the documetation is for .NET and not for dotnetcore, so a lot of parameters, layouts, targets, etc do not work. 
-    This project is open source, so you can extend it and contribute to if if you want.
-
 ## Links
 
 https://github.com/NLog/NLog.Web
