@@ -37,9 +37,7 @@ namespace AspNetCoreNlog
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
             GlobalDiagnosticsContext.Set("configDir", "C:\\git\\damienbod\\AspNetCoreNlog\\Logs");
-            GlobalDiagnosticsContext.Set("connectionString", Configuration.GetConnectionString("NLogDb"));
-
-            //loggerFactory.AddNLog();
+            GlobalDiagnosticsContext.Set("connectionString", Configuration.GetConnectionString("DefaultConnection"));
 
             if (env.IsDevelopment())
             {
