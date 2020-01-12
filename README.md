@@ -1,9 +1,6 @@
 
 # NLog posts in this series:
 
-<strong>Version:</strong> <a href="https://github.com/damienbod/AspNetCoreNlog">VS2017 csproj</a></a>
-
-
 <ol>
 	<li><a href="https://damienbod.com/2016/08/17/asp-net-core-logging-with-nlog-and-microsoft-sql-server/">ASP.NET Core logging with NLog and Microsoft SQL Server</a></li>
 	<li><a href="https://damienbod.com/2016/08/20/asp-net-core-logging-with-nlog-and-elasticsearch/">ASP.NET Core logging with NLog and Elasticsearch</a></li>
@@ -14,6 +11,8 @@
 </ol>
 
 # History
+
+2020-01-12 Updated to .NET Core 3.1, NLog.Web.AspNetCore 4.9.0
 
 2018-04-04 Updated to .NET Core 2.0, NLog 4.5.1, and Elasticsearch Nuget package
 
